@@ -41,7 +41,8 @@ except Exception as e:
     # Stop execution if data load fails
     df = pd.DataFrame()
 
-subset = df.head(10)
+df["text_length"] = df["question"].str.len()
+subset = df.nsmallest(10, "text_length")
 
 print(f"Successfully loaded {len(df)} rows. Processing the first {len(subset)}...\n")
 
